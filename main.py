@@ -2618,3 +2618,4 @@ from turtledemo.penrose import start
 
 print("Вносим изменения в локальный репозиторий")
 
+
