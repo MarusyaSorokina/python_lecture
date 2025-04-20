@@ -928,7 +928,6 @@ import random
 from random import randint
 from turtledemo.penrose import start
 
-
 # lst = [random.randint(0, 100) for i in range(10)]
 # print(lst)
 # max_1 = max(lst)
@@ -2616,6 +2615,122 @@ from turtledemo.penrose import start
 # print(sum(lst))
 
 
-print("Вносим изменения в локальный репозиторий")
+# print("Вносим изменения в локальный репозиторий")
+
+import re
+
+# s = "Я ищу совпадения в 2025 го-ду. И я их найду в 2 счёта.[67895].He.llo_world"
+# reg = r"[2025]"
+# reg = r"[2][0-9][0-9][0-9]"
+# reg = r"[А-яЁё]"
+# reg = r"[^0-9]"
+# reg = r"\d"
+# reg = r"\D"
+# reg = r"\s"
+# reg = r"\S"
+# reg = r"\w"
+# reg = r"\AЯ ищу"
+# reg = r"World.\Z"
+# reg = r"сов\B"
+# reg = r"\w+"
+# reg = r"\20*"
 
 
+# reg = r"\."
+# print(re.findall(reg, s))
+# print(re.search(reg, s))
+# print(re.search(reg, s).span())
+# print(re.search(reg, s).start())
+# print(re.search(reg, s).end())
+# print(re.search(reg, s).group())
+# print(re.match(reg, s))
+# print(re.split(reg, s))
+# print(re.sub(reg, "!", s))
+
+# print(re.findall(reg, s))
+
+# st = "Час в 24-часовом формате от 00 до 23.2021Т21:45. Минуты, в диапазоне от 00 до 59. 2021-06-15Т01:09"
+# reg1 = "[0-2][0-9]:[0-5][0-9]"
+# print(re.findall(reg1, st))
+
+# d = "Цифры: 7, +17, -42, 0013, 0.37658"
+# # print(re.findall(r"[-+]?\d+\.?\d?", d))
+# print(re.findall(r"[-+]?\d+[.\d]*", d))
+
+# d = "05-03-1987 # Дата рождения"
+# print("Дата рождения:", re.sub(r"\s#.*", "", d))
+# print("Дата рождения:", re.sub(r"-", ".", d))
+# print("Дата рождения:", re.sub(r"-", ".", re.sub(r"\s#.*", "", d)))
+
+# st = "autor=Пушкин А.С.; title = Евгений Онегин; price =200; year= 1831"
+# # reg1 = r"\w+\s*=\s*\w+[\s\w.]*"
+# reg1 = r"\w+\s*=[^;]+"
+# print(re.findall(reg1, st))
+# print(re.split(r";\s", st))
+
+# s1 = "12 september 2025 year"
+# # reg1 = r"\d{4}"
+# # reg1 = r"\d{2,4}"
+# # reg1 = r"\d{,4}"
+# reg1 = r"\d{2,}"
+#
+# print(re.findall(reg1, s1))
+
+# st = "+7 499 456-45-78, +74994564578, 7 (499) 456 45 78, 74994564578"
+# reg1 = r"\+?7\d{10}"
+# print(re.findall(reg1, st))
+
+# s = "Я ищу совпадения в 2025 году. И я их найду в 2 счё-та.[67895].He.llo_world."
+# # reg = r"^\w+\s\w+"
+# # reg = r"\w+\.$"
+# reg = r"я"
+
+# print(re.findall(reg, s, re.IGNORECASE))
+#
+# print(re.findall(reg, s))
+
+
+# def validate_login(login):
+#     return re.findall(r"[A-Za-z0-9_-]{3,16}", login)
+#
+#
+# print(validate_login("Python_master"))
+
+# print(re.findall(r"\w+", "12 + й"))
+# print(re.findall(r"\w+", "12 + й", flags=re.ASCII))
+
+# text = "hello world"
+# print(re.findall(r"\w\+", text, flags=re.DEBUG))
+
+# text = """
+# one
+# two
+# """
+
+# print(re.findall(r"one.\w+", text))
+# print(re.findall(r"one.\w+", text, re.DOTALL))
+
+# print(re.findall(r"one$", text))
+# print(re.findall(r"one$", text, re.MULTILINE))
+
+# print(re.findall("""
+# [a-z._-]+  # part1
+# @           # @
+# [a-z.-]+    # part2
+# """, "test@mail.ru", re.VERBOSE))
+
+# text = """Python,
+# python,
+# PYTHON"""
+# reg1 = "(?im)^python"
+# print(re.findall(reg1, text))
+
+# text = "<body>Пример жадного соответствия регулярных выражений</body>"
+# print(re.findall("<.*?>", text))
+
+# s1 = "12 september 2025 year 431464738"
+# reg1 = r"\d{4}"
+# reg1 = r"\d{2,4}?"
+# reg1 = r"\d{,4}?"
+# reg1 = r"\d{2,}?"
+# print(re.findall(reg1, s1))
