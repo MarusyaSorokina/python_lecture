@@ -3,7 +3,8 @@
 # print(name, type(name))
 # print(age, type(age))
 # print(name+str(age))
-import math
+# import math
+# from lib2to3.pytree import convert
 # from email.contentmanager import set_text_content
 from operator import truediv
 
@@ -2734,3 +2735,159 @@ import re
 # reg1 = r"\d{,4}?"
 # reg1 = r"\d{2,}?"
 # print(re.findall(reg1, s1))
+
+# s = "Петр, Ольга и Виталий отлично учатся!"
+# reg = "Петр|Ольга|Виталий|Виктор"
+# print(re.findall(reg, s))
+
+# s = "int = 4, float = 4.0f, double = 8.0"
+# # reg = r"int\s*=\s*\d[.\w+]*|float\s*=\s*\d[.\w+]*"
+# reg = r"(?:int|float)\s*=\s*\d[.\w+]*"
+#
+# print(re.findall(reg, s))
+# print(re.search(reg, s).groups(1))
+# # n = re.search(reg, s)
+# # print(n[0])
+# # print(n[1])
+# # print(n[2])
+# # print(n[3])
+
+# s = "5 +7*2 - 4"
+# reg = r"\s*([+*-])\s*"
+# print(re.split(reg, s))
+
+# a = "31-08-2021"
+# pattern = r"(0[1-9]|[12][0-9]|3[01])-(0[1-9]|1[0-2])-(19[0-9][0-9]|20[0-9][0-9])"
+# print(re.findall(pattern, a))
+# print(re.search(pattern, a))
+
+# s = "Самолет прилетает 10/23/2025. Будем рады вас видеть после 10/24/2025."
+# reg = r"(\d{2})/(\d{2})/(\d{4})"
+# print(re.sub(reg, r"\2.\1.\3", s))
+
+# Рекурсия
+
+# def elevator(n):  # 5 4 3 2 1
+#     if n == 0:
+#         print("Вы в подвале")
+#         return
+#     print("=>", n)
+#     elevator(n-1)   # stak: 5 4 3 2 1
+#     print(n, end=" ")
+#
+#
+# n1 = 5
+# elevator(n1)
+
+
+# def sum_list(lst):
+#     res = 0
+#     for i in lst:
+#         res +=i
+#     return res
+
+
+# def sum_list(lst):  # [9]
+#     if len(lst) == 1:   # 5 = 1 no 4=1 no 3=1no 2=1no 1=1yes
+#         return lst[0]   # 9
+#     else:
+#         return lst[0] + sum_list(lst[1:])  # 1 + 3+5+7+9
+#
+#
+# print(sum_list([1, 3, 5, 7, 9]))   # 25
+
+
+# def to_str(n, base):  # в n приходит 14
+#     convert = "0123456789ABCDEF"
+#     if n < base:
+#         return convert[n]
+#     else:
+#         return to_str(n // base, base) + convert[n % base]   # 254/15 =15,879 15*16=240 254-240=14
+#
+#
+# print(to_str(254, 16))
+
+
+# names = ["Adam", ["Bob", ["Chet", "Cat"], "Bard", "Bert"], "Alex", ["Bea", "Bill"], "Ann"]
+# print(names[0])
+# print(isinstance(names[0], list))
+# print(names[0])
+# print(isinstance(names[1], list))
+# print(names[1][1])
+# print(isinstance(names[1][1])
+
+# names = ["Adam", ["Bob", ["Chet", "Cat"], "Bard", "Bert"], "Alex", ["Bea", "Bill"], "Ann"]
+#
+#
+# def count_item(item_list):
+#     count = 0
+#     for item in item_list:
+#         if isinstance(item, list):
+#             count += count_item(item)
+#         else:
+#             count += 1
+#     return count
+#
+#
+# print(count_item(names))
+
+
+# Файлы
+
+# f = open("text.txt.txt")
+# f = open(r"C:\Users\аааа\Desktop\Lectures")
+#
+# print(f)
+# print(*f)
+# print(f.mode)
+# print(f.name)
+# print(f.encoding)
+# f.close()
+# print(f.closed)
+
+# f = open("text.txt.txt", "r")
+# print(f.read(3))
+# print(f.read())
+#
+# f.close()
+
+# f = open("text2.txt", "w")
+# f.write("This is line1\nThis is line2\nThis is line3\n")
+# f.close()
+
+# f = open("text2.txt", "r")
+# print(f.readline())
+# print(f.readline(8))
+# print(f.readline())
+#
+# f.close()
+
+# f = open("text2.txt", "r")
+# print(f.readlines(26))
+# print(f.readlines())
+#
+# f.close()
+
+# f = open("text2.txt", "r")
+# for line in f:
+#     print(line)
+# f.close()
+
+# f = open("xyz.txt", "w")
+# f.write("Hello\nWorld")
+# f.close()
+#
+# lines = ["This is line1\n", "This is line2\n", "This is line3\n"]
+# f = open("xyz.txt", "a")
+# # f.write("\nNew text")
+# f.writelines(lines)
+# f.close()
+
+# f = open("xyz1.txt", "r")
+
+# f = open("xyz.txt", "w")
+# lst = [str(i) for i in range(10, 1000, 10)]
+# print(lst)
+# for ind in lst:
+#     f.write(ind + '\t')
+# f.close()
