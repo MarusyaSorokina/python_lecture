@@ -6,6 +6,7 @@
 # import math
 # from lib2to3.pytree import convert
 # from email.contentmanager import set_text_content
+from itertools import count
 from operator import truediv
 
 # a = 4
@@ -928,6 +929,7 @@ from operator import truediv
 import random
 from os import write
 from random import randint
+from tkinter.font import names
 from turtledemo.penrose import start
 
 # lst = [random.randint(0, 100) for i in range(10)]
@@ -3256,6 +3258,7 @@ import re
 
 
 # class Point:
+#     __slots__ = ["__x","__y", "z"]
 #
 #     def __init__(self, x, y):
 #         self.__x = x
@@ -3282,6 +3285,266 @@ import re
 #
 #
 # p1 = Point(5, 10)
-# print(p1.__dict__)
-# p1.set_coord("2.3", 2)
+# # p1.z = 3
+# # print(p1.__dict__)
+# # p1.set_coord("2.3", 2)
 # print(p1.get_coord())
+# # p1._Point__x = 111
+# # print(p1.__dict__)
+
+# class Point:
+#     def __init__(self, x, y):
+#         self.__x = x
+#         self.__y = y
+#
+#     def __set_x(self, x):
+#         print("Вызов __set_x")
+#         self.__x = x
+#
+#     def __get_x(self):
+#         print("Вызов __get_x")
+#         return self.__x
+#
+#     def __del_x(self):
+#         print("Удаление свойства")
+#         del self.__x
+#
+#     x = property(__get_x, __set_x, __del_x)
+#
+#
+# p1 = Point(5, 10)
+# print(p1.x)
+# p1.x = 50
+# print(p1.x)
+# del p1.x
+
+
+# class Point:
+#     def __init__(self, x, y):
+#         self.__x = x
+#         self.__y = y
+#
+#     @property
+#     def x(self):
+#         print("Вызов __get_x")
+#         return self.__x
+#
+#     @x.setter
+#     def x(self, x):
+#         if isinstance(x, int):
+#             self.__x = x
+#         else:
+#             print("Некорректный тип данных")
+#
+#     @x.deleter
+#     def x(self):
+#         print("Удаление свойства")
+#         del self.__x
+#
+#
+# p1 = Point(5, 10)
+# # print(p1.x)
+# # p1.x = 50
+# print(p1.x)
+# # del p1.x
+
+
+# class KgToPounds:
+#     def __init__(self, kg):
+#         self.__kg = kg
+#
+#     @property
+#     def kg(self):
+#         return self.__kg
+#
+#     @kg.setter
+#     def kg(self, new_kg):
+#         if isinstance(new_kg, (int,float)):
+#             self.__kg = new_kg
+#         else:
+#             print("Килограммы задаются только числами")
+#
+#     def to_pound(self):
+#         return self.__kg * 2.205
+#
+#
+# w = KgToPounds(12)
+# print(w.kg, "кг =>", w.to_pound(), "фунтов")
+# w.kg = 41
+# print(w.kg, "кг =>", w.to_pound(), "фунтов")
+# w.kg = "ltcznm"
+# print(w.kg, "кг =>", w.to_pound(), "фунтов")
+
+
+# class Person:
+#     def __init__(self, name, age):
+#         self.__name = name
+#         self.__age = age
+#
+#     @property
+#     def name(self):
+#         return self.__name
+#
+#     @name.setter
+#     def name(self, new_name):
+#         self.__name = new_name
+#
+#     @name.deleter
+#     def name(self):
+#         del self.__name
+#
+#     @property
+#     def age(self):
+#         return self.__age
+#
+#     @age.setter
+#     def age(self, new_age):
+#         self.__age = new_age
+#
+#     @age.deleter
+#     def age(self):
+#         del self.__age
+#
+#
+# p1 = Person("Irina", 21)
+# print(p1. __dict__)
+# p1.name = "Igor"
+# print(p1.name)
+# print(p1. __dict__)
+# del p1.name
+# print(p1.__dict__)
+
+
+# class Point:
+#     __count = 0
+#
+#     def __init__(self, x=0, y=0):
+#         self.x = x
+#         self.y = y
+#         Point.__count += 1
+#
+#     @staticmethod
+#     def get_count():
+#         return Point.__count
+#
+#     # get_count = staticmethod(get_count)
+#
+#
+# p1 = Point()
+# p2 = Point()
+# p3 = Point()
+# # print(Point.__dict__)
+# print(Point.get_count())
+
+# def inc(x):
+#     return x + 1
+#
+# def dec(x):
+#     return x - 1
+#
+# print(inc(10), dec(10))
+
+# class Change:
+#     def __init__(self, name):
+#         self.name = name
+#
+#     @staticmethod
+#     def inc(x):
+#         return x + 1
+#
+#     @staticmethod
+#     def dec(x):
+#         return x - 1
+#
+#     def print_info(self):
+#         print("Print info", self.name)
+#
+#
+# print(Change.inc(10), Change.dec(10))
+
+
+# class Numbers:
+#     @staticmethod
+#     def max(a, b, c, d):
+#         mx = a
+#         if b > mx:
+#             mx = b
+#         if c > mx:
+#             mx = c
+#         if d > mx:
+#             mx = d
+#         return mx
+#
+#     @staticmethod
+#     def min(*args):
+#         mn = args[0]
+#         for i in args:
+#             if i < mn:
+#                 mn = i
+#         return mn
+#
+#     @staticmethod
+#     def average(*args):
+#         return sum(args) / len(args)
+#
+#     @staticmethod
+#     def factorial(n):
+#         fact = 1
+#         for i in range(1, n + 1):
+#             fact *= i
+#         return fact
+#
+#
+# print(Numbers.max(13, 5, 7, 9))
+# print(Numbers.min(13, 5, 7, 9))
+# print(Numbers.average(13, 5, 7, 9))
+# print(Numbers.factorial(5))
+
+
+# class Date:
+#     def __init__(self, day, month, year):
+#         self.day = day
+#         self.month = month
+#         self.year = year
+#
+#     def string_to_db(self):
+#         return f"{self.year}-{self.month}-{self.day}"
+#
+#     @classmethod
+#     def from_string(cls, string_date):
+#         day, month, year = map(int, string_date.split("."))
+#         date = Date(day, month, year)
+#         return date
+#
+#     @staticmethod
+#     def is_date_valid(string_date):
+#         if string_date.count(".") == 2:
+#             day, month, year = map(int, string_date.split("."))
+#             return day <= 31 and month <= 12 and year <= 3999
+#
+#
+# dates = [
+#     "23.10.2025",
+#     "23-03-2025",
+#     "01.01.2025",
+#     "12.31.2025",
+# ]
+# for i in dates:
+#     if Date.is_date_valid(i):
+#         date1 = Date.from_string(i)
+#         print(date1.string_to_db())
+#     else:
+#         print("Неправильная дата или формат строки с датой")
+
+# date1 = Date.from_string("23.10.2025")
+# print(date1.string_to_db())
+#
+# date2 = Date.from_string("25.12.2026")
+# print(date2.string_to_db())
+
+# string_date = "23.10.2025"
+# day, month, year = map(int, string_date.split("."))
+# print(day, month, year)
+# date = Date(day, month, year)
+# print(date.string_to_db())
+
