@@ -930,6 +930,7 @@ import random
 from os import write
 from random import randint
 from tkinter.font import names
+from tokenize import group
 from turtledemo.penrose import start
 
 # lst = [random.randint(0, 100) for i in range(10)]
@@ -4762,4 +4763,686 @@ import re
 #
 # for g in figs:
 #     g.info()
+
+
+# ФУНКТОРЫ
+
+
+# class Counter:
+#     def __init__(self):
+#         self.__count = 0
+#
+#     def __call__(self, *args, **kwargs):
+#         self.__count += 1
+#         print(self.__count)
+#
+#
+# c1 = Counter()
+# c1()
+# c1()
+# c1()
+
+
+# def string_strip(chars):
+#     def wrap(string):
+#         if not isinstance(string, str):
+#             raise ValueError("Аргумент должен быть строкой")
+#         return string.strip(chars)
+#
+#     return wrap
+#
+#
+# s1 = string_strip("?:!.;")
+# print(s1(" Hello World! "))
+#
+#
+# class StringStrip:
+#     def __init__(self, chars):
+#         self.__chars = chars
+#
+#     def __call__(self, *args, **kwargs):
+#         if not isinstance(args[0], str):
+#             raise ValueError("Аргумент должен быть строкой")
+#         return args[0].strip(self.__chars)
+#
+#
+# s1 = StringStrip(" ?:!.; ")
+# print(s1("? : Hello World! ;"))
+
+
+# КЛАСС КАК ДЕКОРАТОР
+
+# class MyDecorator:
+#     def __init__(self, fn):
+#         self.fn = fn
+#
+#     def __call__(self):
+#         print("Перед вызовом")
+#         self.fn()
+#         print("После вызова")
+#
+# @MyDecorator
+# def func():
+#     print("text")
+#
+# func()
+
+
+# class MyDecorator:
+#     def __init__(self, fn):
+#         self.fn = fn
+#
+#     def __call__(self, a, b):
+#         print("Перед вызовом")
+#         res = self.fn(a, b)
+#         print("После вызова")
+#         return f"Перед вызовом\n {res} \nПосле вызова"
+#
+# @MyDecorator
+# def func(a, b):
+#     return a * b
+
+
+# print(func(2, 5))
+
+
+# class Power:
+#     def __init__(self, fn):
+#         self.fn = fn
+#
+#     def __call__(self, a, b):
+#         return self.fn(a, b) ** 2
+#
+#
+# @Power
+# def multiply(a, b):
+#     return a * b
+#
+#
+# print(multiply(2, 3))
+
+
+# class MyDecorator:
+#     def __init__(self, fn):
+#         self.fn = fn
+#
+#     def __call__(self, *args, **kwargs):
+#
+#         return f"Перед вызовом\n {self.fn(*args, **kwargs)} \nПосле вызова"
+#
+# @MyDecorator
+# def func(a, b):
+#     return a * b
+#
+# @MyDecorator
+# def func1(a, b, c):
+#     return a * b * c
+#
+#
+# print(func(2, 5))
+# print(func1(2, 5, 3))
+
+
+# class MyDecorator:
+#     def __init__(self, arg):
+#         self.name = arg
+#
+#     def __call__(self, fn):
+#         def wrap(*args, **kwargs):
+#             print("Перед вызовом")
+#             print(self.name)
+#             fn(*args, **kwargs)
+#             print("После вызова")
+#         return wrap
+#
+# @MyDecorator("test")
+# def func(a, b):
+#     print(a, b)
+#
+# func(2, 5)
+
+
+# class Power:
+#     def __init__(self, arg):
+#         self.arg = arg
+#
+#     def __call__(self, fn):
+#         def wrapper(a, b):
+#             return fn(a, b) ** self.arg
+#
+#         return wrapper
+#
+#
+# @Power(3)
+# def multiply(a, b):
+#     return a * b
+#
+#
+# print(multiply(2, 3))
+
+
+# def dec(fn):
+#     def wrap(*args, **kwargs):
+#         print("*" * 20)
+#         fn(*args, **kwargs)
+#         print("*" * 20)
+#
+#     return wrap
+#
+# class Person:
+#     def __init__(self, name, surname):
+#         self.name = name
+#         self.surname = surname
+#
+#     @dec
+#     def info(self):
+#         print(f"{self.name} {self.surname}")
+#
+#
+# p1 = Person("Виталий", "Карасев")
+# p1.info()
+
+
+# ДЕСКРИПТОРЫ
+
+
+# class StringD:
+#     def __init__(self, value=None):
+#         if value:
+#             self.set(value)
+#
+#     def set(self, value):
+#         if not isinstance(value, str):
+#             raise TypeError("Данные должны быть строкой")
+#
+#         self.__value = value
+#
+#     def get(self, value):
+#         self.__value = value
+#
+# class Person:
+#     def __init__(self, name, surname):
+#         self.__name = StringD(name)
+#         self.__surname = StringD(surname)
+
+# @property
+# def name(self):
+#     return self.__name
+#
+# @name.setter
+# def name(self, value):
+#     self.__name = value
+#
+# @property
+# def surname(self):
+#     return self.__surname
+#
+# @surname.setter
+# def surname(self, value):
+#     self.__surname = value
+
+
+# class ValidString:
+#     def __set_name__(self, owner, name):
+#         self.__name = name
+#
+#     def __get__(self, instance, owner):
+#         print(f"Свойство {owner}")
+#         return instance.__dict__[self.__name]
+#
+#     def __set__(self, instance, value):
+#         if not isinstance(value, str):
+#             raise ValueError(f"{self.__name} должно быть строкой")
+#         instance.__dict__[self.__name] = value
+#
+#
+# class Person:
+#     name = ValidString()
+#     surname = ValidString()
+#
+#     def __init__(self, name, surname):
+#         self.__name = name
+#         self.__surname = surname
+#
+#
+# p = Person("Ivan", "Petrov")
+# print(p.name)
+
+
+# class NoneNegative:
+#     def __set_name__(self, owner, name):
+#         self.name = name
+#
+#     def __set__(self, instance, value):
+#         if value < 0:
+#             raise ValueError("Значение должно быть положительным")
+#         instance.__dict__[self.name] = value
+#
+#     def __get__(self, instance, owner):
+#         return instance.__dict__[self.name]
+#
+#
+# class Order:
+#     price = NoneNegative()
+#     quantity = NoneNegative()
+#
+#     def __init__(self, name, price, quantity):
+#         self.name = name
+#         self.price = price
+#         self.quantity = quantity
+#
+#     def total(self):
+#         return self.price * self.quantity
+#
+#
+# apple_order = Order('apple', 10, 5)
+# print(apple_order.total())
+
+
+# МЕТАКЛАССЫ
+
+
+# a = 5
+# print(type(a))
+# print(type(int))
+
+
+# class MyList(list):
+#     def get_length(self):
+#         return len(self)
+
+
+# MyList = type(
+#     "MyList",
+#     (list,),
+#     dict(get_length=lambda self: len(self))
+# )
+#
+# lst = MyList()
+# lst.append(5)
+# lst.append(7)
+# print(lst, lst.get_length())
+
+
+# import math
+# import random
+#
+#
+# # import geometry.rect
+# # import geometry.sq
+# # import geometry.trian
+#
+# from geometry import rect, sq, trian
+# # from geometry import *
+#
+# def run():
+#     r1 = rect.Rectangle(1, 2)
+#     r2 = rect.Rectangle(3, 4)
+#
+#     s1 = sq.Square(10)
+#     s2 = sq.Square(20)
+#
+#     t1 = trian.Triangle(1, 2, 3)
+#     t2 = trian.Triangle(4, 5, 6)
+#
+#     shape = [r1, r2, s1, s2, t1, t2]
+#
+#     for g in shape:
+#         print(g.perimeter())
+#
+#
+# if __name__ == '__main__':
+#     run()
+
+
+# УПАКОВКА(cериализация) и РАСПАКОВКА(десериализация) ДАННЫХ
+
+import pickle
+
+# filename = "basket.txt"
+#
+#
+# shop_list = {
+#     "фрукты": ["яблоко", "манго"],
+#     "овощи": ("морковь", "лук"),
+#     "бюджет": 1000
+# }
+#
+# with open(filename, "wb") as f:
+#     pickle.dump(shop_list, f)
+#
+# with open(filename, "rb") as f:
+#     res = pickle.load(f)
+#
+# print(res)
+
+#
+# class Test:
+#     num = 35
+#     string = "Hello"
+#     lst = [1, 2, 3]
+#     tpl = (22, 23)
+#
+#     def __str__(self):
+#         return f"Number: {Test.num}\nString: {Test.string}\nList: {Test.lst}\nTuple: {Test.tpl}"
+#
+#
+# obj = Test()
+# # print(obj)
+#
+# my_obj = pickle.dumps(obj)
+# res = pickle.loads(my_obj)
+# print(res)
+# print(my_obj)
+
+# class Test2:
+#     def __init__(self):
+#         self.a = 35
+#         self.b = "test"
+#         self.c = lambda x: x * x
+#
+#     def __str__(self):
+#         return f"{self.a} {self.b} {self.c(2)}"
+#
+#     def __getstate__(self):
+#         attr = self.__dict__.copy()
+#         del attr['c']
+#         return attr
+#
+#     def __setstate__(self, state):
+#         self.__dict__ = state
+#         self.c = lambda x: x * x
+#
+#
+#
+# item1 = Test2()
+# item2 = pickle.dumps(item1)
+# item3 = pickle.loads(item2)
+# print(item3.__dict__)
+#
+# print(item1)
+
+
+import json
+
+
+# data = {
+#     'name': 'Olga',
+#     'age': 35,
+#     20: None,
+#     True: 1,
+#     'hobbies': ('running', 'singing'),
+#     'children': [
+#         {
+#             'firstName': 'Alice',
+#             'age': 6
+#         }
+#     ],
+#     None: "Кортеж"
+#
+# }
+
+# with open("data_file.json", "w") as f:
+#     json.dump(data, f, indent=4)
+
+# with open("data_file.json", "r") as f:
+#     data1 = json.load(f)
+# print(data1)
+#
+# json_string = json.dumps(data, ensure_ascii=False)
+# print(json_string)
+#
+# res = json.loads(json_string)
+# print(res)
+
+
+# import json
+# from random import choice
+#
+# # ДЛЯ ДЗ КОД
+# def gen_person():
+#     name = ''
+#     tel = ''
+#
+#     letters = ['a', 'b', 'c', 'd', 'f', 'g', 'h', 'e', 'k', 'l', 'm', 'n']
+#     num = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '0']
+#
+#     while len(name) != 7:
+#         name += choice(letters)
+#
+#     while len(tel) != 10:
+#         tel += choice(num)
+#
+#     person = {
+#         'name': name,
+#         'tel': tel
+#     }
+#     return person
+#
+#
+# def write_json(person_dict):
+#     try:
+#         data = json.load(open('persons.json'))
+#     except FileNotFoundError:
+#         data = []
+#
+#     data.append(person_dict)
+#     with open('persons.json', 'w') as f:
+#         json.dump(data, f, indent=2)
+#
+#
+# for i in range(5):
+#     write_json(gen_person())
+
+
+# class Student:
+#     def __init__(self, name, marks):
+#         self.name = name
+#         self.marks = marks
+#
+#     def __str__(self):
+#         # st = ''
+#         # for i in self.marks:
+#         #     st += str(i) + ", "
+#         # return f"Студент: {self.name}: {st[:-2]}"
+#         # st = ", ".join(map(str, self.marks))
+#         # return f"Студент: {self.name}: {st}"
+#         return f"Студент: {self.name}:{", ".join(map(str, self.marks))}"
+#
+#     def add_marks(self, mark):
+#         self.marks.append(mark)
+#
+#     def delete_mark(self, index):
+#         self.marks.pop(index)
+#
+#     def edit_mark(self, index, new_mark):
+#         self.marks[index] = new_mark
+#
+#     def average_marks(self):
+#         return sum(self.marks) / len(self.marks)
+#
+#     def get_file_name(self):
+#         return self.name + ".json"
+#
+#     def dump_to_json(self):
+#         data = {"name": self.name, 'marks': self.marks}
+#         with open(self.get_file_name(), "w") as f:
+#             json.dump(data, f)
+#
+#     def load_from_file(self):
+#         with open(self.get_file_name(), "r") as f:
+#             print(json.load(f))
+#
+#
+# class Group:
+#     def __init__(self, students, group):
+#         self.students = students
+#         self.group = group
+#
+#     def __str__(self):
+#         # st = ""
+#         # for i in self.students:
+#         #     st += str(i) + "\n"
+#         st = "\n".join(map(str, self.students))
+#         return f"Группа: {self.group}\n{st}"
+#
+#     def add_student(self, student):
+#         self.students.append(student)
+#
+#     def remove_student(self, index):
+#         return self.students.pop(index)
+#
+# @staticmethod
+# def change_group(gr1, gr2, index):
+#     # stg = gr1.remove_student(index)
+#     gr2.add_student(gr1.remove_student(index))
+#
+#
+# def get_file_name(self):
+#     return self.group.lower().replace(" ", "-") + ".json"
+#
+#
+# def dump_to_json(self):
+#     data = [{"name": student.name, 'marks': student.marks} for student in self.students]:
+#     with open(self.get_file_name(), "w") as f:
+#         json.dump(data, f, indent=2)
+#
+#
+# st1 = Student("Bodnya", [5, 4, 3, 4, 5, 3])
+# st2 = Student("Nikolaenko", [2, 3, 5, 4, 2])
+# st3 = Student("Birukov", [3, 5, 3, 2, 5, 4])
+#
+# # print(st1)
+# # print(st2)
+# sts1 = [st1, st2]
+# group1 = Group(sts1, "ГК Python")
+# print(group1)
+# print()
+# group1.add_student(st3)
+# print(group1)
+#
+# group1.remove_student(1)
+# print(group1)
+#
+# sts2 = st2
+# group2 = Group(sts2, "ГК Web")
+# print(group2)
+# # st1.add_marks(5)
+# # print(st1)
+# # st1.delete_mark(2)
+# # print(st1)
+# # st1.edit_mark(4, 4)
+# # print(st1)
+# # print(st1.average_marks())
+# # st2.dump_to_json()
+# # st2.load_from_file()
+#
+# Group.change_group()
+
+
+# import json
+#
+#
+# class CountryCapital:
+#     @staticmethod
+#     def load(file_name):
+#         try:
+#             data = json.load(open(file_name))
+#         except FileNotFoundError:
+#             data = {}
+#         finally:
+#             return data
+#
+#     @staticmethod
+#     def add_country(file_name):
+#         new_country = input("Введите название страны: ").lower()
+#         new_capital = input("Введите название столицы: ").lower()
+#
+#         # try:
+#         #     data = json.load(open(file_name))
+#         # except FileNotFoundError:
+#         #     data = {}
+#         data = CountryCapital.load(file_name)
+#
+#         data[new_country] = new_capital
+#
+#         with open(file_name, "w") as f:
+#             json.dump(data, f)
+#
+#     @staticmethod
+#     def load_from_file(file_name):
+#         with open(file_name) as f:
+#             print({k.capitalize(): v.capitalize() for k, v in json.load(f).items()})
+#
+#     @staticmethod
+#     def delete_country(file_name):
+#         del_country = input("Введите название страны: ").lower()
+#
+#         # try:
+#         #     data = json.load(open(file_name))
+#         # except FileNotFoundError:
+#         #     data = {}
+#         data = CountryCapital.load(file_name)
+#
+#         if del_country in data:
+#             del data[del_country]
+#
+#             with open(file_name, "w") as f:
+#                 json.dump(data, f)
+#         else:
+#             print("Такой страны в базе нет")
+#
+#     @staticmethod
+#     def search_data(file_name):
+#         county = input("Введите название страны: ").lower()
+#
+#         # try:
+#         #     data = json.load(open(file_name))
+#         # except FileNotFoundError:
+#         #     data = {}
+#         data = CountryCapital.load(file_name)
+#
+#         if county in data:
+#             print(f"Страна {county.capitalize()} столица {data[county].capitalize()} есть в словаре.")
+#         else:
+#             print(f"Страны {county.capitalize()} нет в словаре.")
+#
+#     @staticmethod
+#     def edit_data(file_name):
+#         country = input("Введите страну для корректировки: ").lower()
+#         new_capital = input("Введите новое название столицы: ").lower()
+#
+#         # try:
+#         #     data = json.load(open(file_name))
+#         # except FileNotFoundError:
+#         #     data = {}
+#         data = CountryCapital.load(file_name)
+#
+#         if country in data:
+#             data[country] = new_capital
+#             with open(file_name, "w")as f:
+#                 json.dump(data, f)
+#
+#         else:
+#             print("Такой страны нет в словаре")
+#
+#
+# file = "list_capital.json"
+# while True:
+#     index = input("Выбор действия:\n1 - добавление данных\n2- удаление данных"
+#                   "\n3 - поиск данных\n4 - редактирование данных\n5 - просмотр данных\n6 - завершение работы\nВвод:")
+#     if index == "1":
+#         CountryCapital.add_country(file)
+#     elif index == "2":
+#         CountryCapital.delete_country(file)
+#     elif index == "3":
+#         CountryCapital.search_data(file)
+#     elif index == "4":
+#         CountryCapital.edit_data(file)
+#     elif index == "5":
+#         CountryCapital.load_from_file(file)
+#     elif index == "6":
+#         break
+#     else:
+#         print("Введен некорректный номер")
 

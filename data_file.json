@@ -1,0 +1,17 @@
+{
+    "name": "Olga",
+    "age": 35,
+    "20": null,
+    "true": 1,
+    "hobbies": [
+        "running",
+        "singing"
+    ],
+    "children": [
+        {
+            "firstName": "Alice",
+            "age": 6
+        }
+    ],
+    "null": "\u041a\u043e\u0440\u0442\u0435\u0436"
+}
