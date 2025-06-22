@@ -74,12 +74,18 @@ WHERE REM GLOB '*(1[5-9],[0-9]*"*)'
 
 20. Напишите запрос, который покажет всех поставщиков сумок не черного цвета.
 
-
+SELECT ID_salespeople, Color, REM
+FROM Ware
+WHERE Color IS NOT 'ч'
 
 21. Замените материал полиэстер у сумок китайского производства на нейлон
 
-
+UPDATE Ware
+SET Material = 'нейлон'
+WHERE Material = 'полиэстер' AND Country = 'Китай'
 
 22. В записях с кодом товара: 1015, 1041, 1032, 1010 материал нейлон заменить на полиэстер если страна-производитель Китай.
 
-
+UPDATE Ware
+SET Material = 'полиэстер'
+WHERE Material = 'нейлон' AND Country = 'Китай' AND (ID=1015 OR ID=1041 OR ID=1032 OR ID=1010)

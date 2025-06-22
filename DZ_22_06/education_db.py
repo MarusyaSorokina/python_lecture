@@ -35,4 +35,3 @@ with sqlite3.connect("education.db") as con:
     lesson_title TEXT NOT NULL
     )
     """)
-    
