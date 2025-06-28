@@ -22,11 +22,10 @@ with sqlite3.connect("education.db") as con:
     cur.execute("""CREATE TABLE IF NOT EXISTS association(
         lesson_id INTEGER NOT NULL,
         group_id INTEGER NOT NULL,
-        FOREIGN KEY (lesson_id) REFERENCES lessons(id) ON DELETE RESTRICT,
+        PRIMARY KEY (lesson_id, group_id)
         FOREIGN KEY (group_id) REFERENCES lessons(id) ON DELETE RESTRICT,
-        FOREIGN KEY (lesson_id) REFERENCES groups(id) ON DELETE RESTRICT,
-        FOREIGN KEY (group_id) REFERENCES groups(id) ON DELETE RESTRICT
-
+        FOREIGN KEY (lesson_id) REFERENCES groups(id) ON DELETE RESTRICT
+        
         )
         """)
 
