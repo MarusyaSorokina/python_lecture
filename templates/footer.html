@@ -1,0 +1,5 @@
+<footer>
+    Подвал
+</footer>
+</body>
+</html>

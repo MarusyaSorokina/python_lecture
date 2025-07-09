@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+    {% from 'dialoge.html' import dialog_1 as dig %}
+
+    {{dig('text', 'firstname', 'Имя')}}
+    {{dig('text', 'lastname', 'Фамилия')}}
+    {{dig('text', 'address', 'Адрес')}}
+    {{dig('tel', 'phone', 'Телефон')}}
+    {{dig('email', 'email', 'Почта')}}
+
+
+
+</body>
+</html>

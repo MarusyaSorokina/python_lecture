@@ -1,0 +1,13 @@
+{% include 'header.html' %}
+
+{% from 'dialog.html' import dialog_1 as dig %}
+
+    <h1>Главная страница</h1>
+<ul>
+    {% for u in users %}
+        <li>{{u.name}}</li>
+    {% endfor %}
+</ul>
+
+{{dig("Вгимание", "Текстовый диалог")}}
+{% include 'footer.html' %}

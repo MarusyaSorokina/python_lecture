@@ -6069,18 +6069,18 @@ import sqlite3
 #     );
 #     """)
 
-    # cur.execute("INSERT INTO cars VALUES(NULL, 'Запорожец', 1000)")
-    # last_id = cur.lastrowid
-    # buy_id = 2
-    # cur.execute("INSERT INTO cost VALUES('Ilya', ?, ?)", (last_id, buy_id))
+# cur.execute("INSERT INTO cars VALUES(NULL, 'Запорожец', 1000)")
+# last_id = cur.lastrowid
+# buy_id = 2
+# cur.execute("INSERT INTO cost VALUES('Ilya', ?, ?)", (last_id, buy_id))
 
-    # cur.execute("SELECT model, price FROM cars")    # вернет кортеж
-    # for res in cur:
-    #     print(res['model'], res['price'])
+# cur.execute("SELECT model, price FROM cars")    # вернет кортеж
+# for res in cur:
+#     print(res['model'], res['price'])
 
-    # print(cur.fetchall())
-    # print(cur.fetchone())
-    # print(cur.fetchmany(5))
+# print(cur.fetchall())
+# print(cur.fetchone())
+# print(cur.fetchmany(5))
 
 
 # def read_ava(n):
@@ -6135,4 +6135,161 @@ import sqlite3
 #         sql = f.read()
 #         cur.executescript(sql)
 
+#
+# /     {'id': 5, 'city': 'Ярославль'},
+#
+# ]
+#
+# link = """<select>
+#     {% for c in cities %}
+#     {% if c.id > 3 %}
+#         <option value="{{ c['id' ]}}">{{ c['city'] }}</option>
+#     {% elif c.city== 'Москва' %}
+#         <option>{{ c['city'] }}</option>
+#
+#     {% else %}
+#         {{c['city']}}
+#
+#     {% endif %}
+#     {% endfor %}
+# </select>
+# """
 
+# tm = Template(link)
+# msg = tm.render(cities=cities)
+#
+# print(msg)
+
+# menu = [
+#     {'href': '/index', 'link': 'Главная'},
+#     {'href': '/news', 'link': 'Новости'},
+#     {'href': '/about', 'link': 'О компании'},
+#     {'href': '/shop', 'link': 'Магазин'},
+#     {'href': '/contacts', 'link': 'Контанкты'},
+#
+# ]
+#
+# link = """<ul>
+#     {% for i in menu %}
+#         {% if i.li == 'Главная' %}
+#         <li><a href='{{ i['href'] }}'class='active'>{{ i['link' ]}}</a></li>
+#         {% else %}
+#         <li><a href='{{ i['href'] }}'>{{ i['link' ]}}</a></li>
+#         {% endif %}
+#
+#     {% endfor %}
+# </ul>"""
+
+# tm = Template(link)
+# msg = tm.render(menu=menu)
+#
+# print(msg)
+
+# cars = [
+#     {'model': 'Audi', 'price': 23000},
+#     {'model': 'Skoda', 'price': 17000},
+#     {'model': 'Renault', 'price': 25000},
+#     {'model': 'Ford', 'price': 33000}
+#
+# ]
+# cars = [4, 5, 6, 7, 8, 9, 17]
+# tpl = "{{ cs | sum(attribute='price') }}"
+# tpl = "{{ cs|sum}}"
+
+# tpl = "{{ (cs | max(attribute='price')).model }}"
+# tpl = "{{ cs | random }}"
+# tpl = "{{ cs | replace('model', 'brand') }}"
+#
+# tm = Template(tpl)
+# msg = tm.render(cs=cars)
+#
+# print(msg)
+
+
+# persons = [
+#     {'name': 'Alex', 'year': 18, 'weight': 78.5},
+#     {'name': 'Nikita', 'year': 28, 'weight': 82.3},
+#     {'name': 'Vitaliy', 'year': 32, 'weight': 94.1},
+#
+# ]
+#
+# tpl = """
+# {% for u in users %}
+# {% filter upper%}{{ u.name }}{% endfilter %}
+#
+# {% endfor %}
+# """
+#
+# tm = Template(tpl)
+# msg = tm.render(users=persons)
+#
+# print(msg)
+
+# html = """
+# {% macro fun_input(name, value='', type='text', size=20) %}
+#     <input type="{{ type }}" name=>"{{ name }}" value="{{ value }}" size={{size}}>
+# {% endmacro %}
+#
+# <p>{{ fun_input('username', '', 'text', 40) }}</p>
+# <p>{{ fun_input('email', 'Login', 'email') }}</p>
+# <p>{{ fun_input('password', 'Password', 'password') }}</p>
+#
+# """
+#
+# tm = Template(html)
+# msg = tm.render()
+#
+# print(msg)
+
+# from jinja2 import Environment, FileSystemLoader
+
+
+# persons = [
+#     {'name': 'Alex', 'year': 18, 'weight': 78.5},
+#     {'name': 'Nikita', 'year': 28, 'weight': 82.3},
+#     {'name': 'Vitaliy', 'year': 32, 'weight': 94.1},
+#
+# ]
+#
+# # html = """
+# # {% macro list_users(list_of_user) %}
+# #     <ul>
+# #         {% for u in list_of_user %}
+# #             <li>{{ u.name }} {{ caller(u) }}</li>
+# #         {%endfor%}
+# #     </ul>
+# # {%endmacro%}
+# #
+# # {% call(user) list_users(users) %}
+# #     <ul>
+# #         <li>age: {{ user.year}}</li>
+# #         <li>weight: {{ user.weight}}</li>
+# #
+# #     </ul>
+# # {%endcall%}
+# #
+# #
+# # """
+# #
+# #
+# # tm = Template(html)
+# # msg = tm.render(users=persons)
+# #
+# # print(msg)
+#
+# file_loader = FileSystemLoader('templates')
+# env = Environment(loader=file_loader)
+#
+# tm = env.get_template('home.html')
+# msg = tm.render(users=persons, title="About Jinja")
+#
+# print(msg)
+
+
+# file_loader = FileSystemLoader('templates')
+# env = Environment(loader=file_loader)
+#
+# tm = env.get_template('about.html')
+# msg = tm.render()
+#
+# print(msg)
