@@ -1,24 +1,15 @@
-from cars.database import Base
-from sqlalchemy import Column, Integer, String, ForeignKey
+from cars.database import Cars
+from sqlalchemy import Column, Integer, String
+from sqlalchemy.orm import relationship
 
 
-class Salon(Base):
-    __tablename__ = 'salon'
+class Salon(Cars):
+    __tablename__ = 'salons'
 
     id = Column(Integer, primary_key=True)
-    name = Column(String(250), nullable=False)
-    city = Column(String(250), nullable=False)
-    rating = Column(Integer, nullable=False)
-    car = Column(Integer, ForeignKey('car.id'))
+    salon_name = Column(String(250), nullable=False)
 
-    def __init__(self, name, city, rating, id_car):
-        self.name = name
-        self.city = city
-        self.rating = rating
-        self.car = id_car
+    buyer = relationship('Buyer')
 
     def __repr__(self):
-        return (f"Салон: {self.name}, Авто: {self.car}, Город: {self.city}, Рейтинг: {self.rating})")
-
-
-
+        return (f"ID: {self.id}, Название: {self.salon_name}")
